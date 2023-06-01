@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Campo Magnetico</title>
+<link href="https://fonts.googleapis.com/css?family=Bungee&display=swap"
+	rel="stylesheet">
+<style>
+
+body {
+	background-image:
+		url("https://cdn.pixabay.com/photo/2016/12/29/18/44/background-1939128_1280.jpg");
+	text-align: center;
+}
+
+.titulo {
+	color: white;
+}
+
+.boton {
+	position: absolute;
+	top: 20%;
+	left: 47%;
+	background: none;
+	border: none;
+	background: none;
+	background: none;
+	background: none
+}
+
+.imagenBoton {
+	width: 500px;
+	height: 500px;
+}
+.sol{
+	position: absolute;
+	left: 0%;
+}
+
+.imagenSol{
+    position: absolute;
+    top: 10%;
+    width: 300px;
+	height: 700px;
+    
+}
+.flecha {
+	position: absolute;
+	left: 16%;
+	top: 50%;
+	width: 30px;
+	height: 30px;
+}
+#imagenFlecha {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+   transition: left 1s ease, top 1s ease;
+  
+}
+#imagenFlecha2 {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+   transition: left 1s ease, top 1s ease;
+}
+.brujula{
+   position: absolute;
+	left: 52%;
+	top: 43%;
+	width: 200px;
+	height: 200px;
+
+}
+#imagenBrujula {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+   transition: left 1s ease, top 1s ease;
+  
+}
+
+
+</style>
+</head>
+<body>
+	<h1 class="titulo">Magnetismo</h1>
+
+	<div class="tierra">
+		<button type="button" class="boton">
+			<img class="imagenBoton"
+				src="https://cdn.pixabay.com/photo/2018/03/11/03/22/planet-earth-3215887_640.png" />
+		</button>
+
+	</div>
+   <div class="sol">
+	<img class="imagenSol" src="img/sol.png" />
+   </div>
+
+   <div id="flecha "class="flecha">
+	<img id="imagenFlecha" src="img/png-transparent-yellow-left-arrow-signage-line-angle-area-brand-arrow-yellow-right-angle-text-rectangle-removebg-preview.png"/>
+   <img id="imagenFlecha2" src="img/png-transparent-yellow-left-arrow-signage-line-angle-area-brand-arrow-yellow-right-angle-text-rectangle-removebg-preview.png"/> 
+   </div>
+
+   <div class="brujula" >
+      <img id="imagenBrujula" src="img/brujula-removebg-preview.png" />
+   </div>
+      
+    
+	<canvas id="lineasCampo" width="1920px" height="1080px">
+	
+	</canvas>
+
+
+
+	<script>
+     
+	
+	var lienzo;
+	var ctx;
+	function draw(){
+        lienzo=document.querySelector("#lineasCampo");
+        ctx=lienzo.getContext("2d");
+        //izquierdo pequenio
+        ctx.beginPath();
+        ctx.moveTo(960,186);
+        ctx.bezierCurveTo(600,10,600,620,960,460);
+        ctx.lineWidth=5;
+        ctx.strokeStyle="blue";
+      
+        ctx.stroke();
+        
+        //derecho pequenio
+        ctx.moveTo(960,186);
+        ctx.bezierCurveTo(1450,10,1250,670,960,460);
+        ctx.lineWidth=5;
+        ctx.strokeStyle="blue";
+        ctx.stroke();
+
+        //izquierdo grande
+        ctx.beginPath();
+        ctx.moveTo(960,186);
+        ctx.bezierCurveTo(400,-300,400,1000,960,460);
+        ctx.lineWidth=5;
+        ctx.strokeStyle="blue";
+        ctx.stroke();
+
+        //Derecho grande
+        ctx.beginPath();
+        ctx.moveTo(960,186);
+        ctx.bezierCurveTo(1700,-300,1400,1000,960,460);
+        ctx.lineWidth=5;
+        ctx.strokeStyle="blue";
+        ctx.stroke();
+
+        //Sol arriba
+        ctx.beginPath();
+        ctx.moveTo(260,300);
+        ctx.bezierCurveTo(900,-180,300,100,1400,5);
+        ctx.lineWidth=5;
+        ctx.strokeStyle="orange";
+        ctx.stroke();
+
+        //Sol abajo
+        ctx.beginPath();
+        ctx.moveTo(260,300);
+        ctx.bezierCurveTo(800,700,300,600,1400,650);
+        ctx.lineWidth=5;
+        ctx.strokeStyle="orange";
+        ctx.stroke();
+
+	}
+	draw();
+
+var imagen =document.getElementById('imagenFlecha');
+// Establece las coordenadas iniciales
+var x = 0;
+var y = 0;
+
+// Establece la velocidad de movimiento en píxeles por fotograma
+var velocidadX = 2.7;
+var velocidadY = 2.5;
+
+// Función de animación
+function animar2() {
+  // Actualiza las coordenadas
+   y += velocidadY;
+   x += velocidadX;
+  // Aplica las coordenadas a la posición de la imagen
+  imagen.style.left = x + 'px';
+  imagen.style.top = y + 'px';
+  
+if(x+imagen.width >=350){
+   imagen.style.top ="350px"
+}
+  // Comprueba si la imagen alcanza los límites del contenedor
+if (x + imagen.width >= 1200|| x <= 0 && y + imagen.height >= 600 || y <= 0) {
+    // Invierte la dirección en el eje X si alcanza los límites
+   
+    imagen.style.left ='0px' ;
+    imagen.style.top = '0px';
+  }
+}
+
+setInterval(animar2,16);
+
+
+
+// Inicia la animación utilizando setInterval
+
+var objeto = document.getElementById('imagenFlecha2');
+var y2 = 0;
+var x2=0;
+var velocidadx2=2.7;
+var velocidady2 = 2.5;
+
+function animar() {
+  // Actualiza la coordenada Y
+  x2+=velocidadx2;
+  y2 -= velocidady2;
+  
+
+  // Aplica la coordenada a la posición del objeto
+  objeto.style.top = y2 + 'px';
+  objeto.style.left=x2+"px";
+  if(x+objeto.width >=550){
+   objeto.style.top ="-270px"
+}
+if (x + objeto.width >= 1200|| x <= 0 && y + objeto.height <= 70 || y <= 0) {
+    // Invierte la dirección en el eje X si alcanza los límites
+   
+    objeto.style.left ='0px' ;
+    objeto.style.top = '0px';
+  }
+  
+}
+// Inicia la animación utilizando setInterval
+setInterval(animar, 16); //
+
+
+
+
+var brujula=document.getElementById('imagenBrujula');
+var isMouseDown = false;
+var initialX;
+var initialY;
+
+brujula.addEventListener("mousedown", function(event) {
+  isMouseDown = true;
+  initialX = event.clientX - brujula.offsetLeft;
+  initialY = event.clientY - brujula.offsetTop;
+  
+});
+
+document.addEventListener("mouseup", function() {
+  isMouseDown = false;
+  
+});
+brujula.ondragstart = function() {
+  return false;
+};
+
+document.addEventListener("mousemove", function(event) {
+  if (isMouseDown) {
+    brujula.style.left = (event.clientX - initialX) + "px";
+    brujula.style.top = (event.clientY - initialY) + "px";
+    
+    if(event.clientX - initialX >= 27 && event.clientX - initialX <= 42 && event.clientY - initialY <=-100) {
+         brujula.style.transform='rotate(180deg)';
+    }
+    if(event.clientX - initialX >= -37 && event.clientX - initialX <= 27 && event.clientY - initialY <=-100){
+      brujula.style.transform='rotate(130deg)';
+    }
+    if(event.clientX - initialX >= 45 && event.clientX - initialX <= 100 && event.clientY - initialY <=-100){
+      brujula.style.transform='rotate(230deg)';
+    }
+    if(event.clientY - initialY >=20 && event.clientY - initialY<=60){
+      brujula.style.transform='rotate(0deg)';
+    }
+    if(event.clientY - initialY >=61 && event.clientX - initialX >= 31 && event.clientX - initialX <= 55 ){
+      brujula.style.transform='rotate(180deg)';
+    }
+    if(event.clientY - initialY >=61 && event.clientX - initialX >= -38 && event.clientX - initialX <= 30 ){
+      brujula.style.transform='rotate(240deg)';
+    }
+    if(event.clientY - initialY >=61 && event.clientX - initialX >= 56   ){
+      brujula.style.transform='rotate(120deg)';
+    }
+    
+   
+
+    console.log(event.clientX-initialX+"x");
+    console.log(event.clientY-initialY+"y");
+
+    
+   
+
+      
+  }
+});
+
+
+
+
+
+
+
+
+
+	</script>
+
+
+
+
+
+</body>
+</html>
